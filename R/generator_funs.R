@@ -4,6 +4,14 @@ generator_funs$get_inherit <- function() {
   eval(inherit, parent_env, NULL)
 }
 
+# --------------------------- ADD ------------------------
+# This function returns the implemented interface superclass object
+generator_funs$get_implement <- function() {
+  # The NULL arg speeds up eval a tiny bit
+  eval(implement, parent_env, NULL)
+}
+# --------------------------- ADD ------------------------
+
 # This is the $has_private function for a R6ClassGenerator. This copy of it
 # won't run properly; it needs to be copied, and its parent environment set to
 # the generator object environment.
@@ -13,10 +21,14 @@ generator_funs$has_private <- function() {
   inherit <- get_inherit()
   if (!is.null(private_fields) || !is.null(private_methods))
     TRUE
-  else if (is.null(inherit))
+  # --------------------------- MODIFY ------------------------
+  else if (is.null(inherit) && is.null(implement))
     FALSE
-  else
+  else if (!is.null(inherit))
     inherit$has_private()
+  else
+    implement$has_private()
+  # --------------------------- MODIFY ------------------------
 }
 
 # This is the $set function for a R6ClassGenerator. This copy of it won't run

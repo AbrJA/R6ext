@@ -104,6 +104,15 @@
 #' @param inherit A R6ClassGenerator object to inherit from; in other words, a
 #'   superclass. This is captured as an unevaluated expression which is
 #'   evaluated in \code{parent_env} each time an object is instantiated.
+#' --------------------------- ADD ------------------------
+#' @param implement A R6ClassGenerator object to inherit from which represents
+#'   an interface class; this is very similar to argument \code{inherit} with
+#'   the subtle difference that such objects merely mimick abstract classes that
+#'   only define abstract methods and must not contain \strong{any} data fields.
+#'   The main benefit is being able to write code that fits the \emph{SOLID
+#'   principles of object-oriented design}
+#'   (\url{https://en.wikipedia.org/wiki/SOLID_\%28object-oriented_design\%29}).
+#' --------------------------- ADD ------------------------
 #' @param portable If \code{TRUE} (the default), this class will work with
 #'   inheritance across different packages. Note that when this is enabled,
 #'   fields and members must be accessed with  \code{self$x} or
@@ -466,10 +475,12 @@
 # enclosed in the capsule environment
 R6Class <- encapsulate(function(classname = NULL, public = list(),
                                 private = NULL, active = NULL,
-                                inherit = NULL, lock_objects = TRUE,
-                                class = TRUE, portable = TRUE,
-                                lock_class = FALSE, cloneable = TRUE,
-                                parent_env = parent.frame()) {
+                                # --------------------------- MODIFY ------------------------
+                                inherit = NULL, implement = NULL,
+                                # --------------------------- MODIFY ------------------------
+                                lock_objects = TRUE, class = TRUE,
+                                portable = TRUE, lock_class = FALSE,
+                                cloneable = TRUE, parent_env = parent.frame()) {
 
   if (!all_named(public) || !all_named(private) || !all_named(active))
     stop("All elements of public, private, and active must be named.")
@@ -522,6 +533,13 @@ R6Class <- encapsulate(function(classname = NULL, public = list(),
   # Capture the unevaluated expression for the superclass; when evaluated in
   # the parent_env, it should return the superclass object.
   generator$inherit <- substitute(inherit)
+
+  # --------------------------- ADD ------------------------
+  # Capture the unevaluated expression for the interface implementation
+  # superclass; when evaluated in the parent_env, it should return the
+  # superclass object.
+  generator$implement <- substitute(implement)
+  # --------------------------- ADD ------------------------
 
   # Names of methods for which to enable debugging
   generator$debug_names <- character(0)

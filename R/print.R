@@ -7,6 +7,19 @@ format.R6 <- function(x, ...) {
 
     # If there's another class besides first class and R6
     classes <- setdiff(class(x), "R6")
+    # --------------------------- ADD ------------------------
+    if (!is.null(name <- getImplementClassname(x))) {
+      # --> doesn't work for all scenarios as `get(class(x)[1])` sometimes
+      # returns an error
+      ret <- c(ret, paste0("  Implements interface: <", name, ">"))
+      # Update classes for "actual inherits part"
+      classes <- classes[classes != name]
+    } else if (any(idx <- grepl("^I", classes))) {
+      ret <- c(ret, paste0("  Implements interface: <", classes[idx], ">"))
+      # Update classes for "actual inherits part"
+      classes <- classes[!idx]
+    }
+    # --------------------------- ADD ------------------------
     if (length(classes) >= 2) {
       ret <- c(ret, paste0("  Inherits from: <", classes[2], ">"))
     }
@@ -47,6 +60,12 @@ format.R6ClassGenerator <- function(x, ...) {
   if (!is.null(x$inherit)) {
     ret <- c(ret, paste0("  Inherits from: <", deparse(x$inherit), ">"))
   }
+
+  # --------------------------- ADD ------------------------
+  if (!is.null(x$implement)) {
+    ret <- c(ret, paste0("  Implements interface: <", deparse(x$implement), ">"))
+  }
+  # --------------------------- ADD ------------------------
 
   ret <- c(ret,
     "  Public:",
