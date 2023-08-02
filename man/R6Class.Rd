@@ -11,6 +11,7 @@ R6Class(
   private = NULL,
   active = NULL,
   inherit = NULL,
+  implement = NULL,
   lock_objects = TRUE,
   class = TRUE,
   portable = TRUE,
@@ -32,8 +33,18 @@ and non-functions.}
 \item{active}{An optional list of active binding functions.}
 
 \item{inherit}{A R6ClassGenerator object to inherit from; in other words, a
-superclass. This is captured as an unevaluated expression which is
-evaluated in \code{parent_env} each time an object is instantiated.}
+  superclass. This is captured as an unevaluated expression which is
+  evaluated in \code{parent_env} each time an object is instantiated.
+--------------------------- ADD ------------------------}
+
+\item{implement}{A R6ClassGenerator object to inherit from which represents
+  an interface class; this is very similar to argument \code{inherit} with
+  the subtle difference that such objects merely mimick abstract classes that
+  only define abstract methods and must not contain \strong{any} data fields.
+  The main benefit is being able to write code that fits the \emph{SOLID
+  principles of object-oriented design}
+  (\url{https://en.wikipedia.org/wiki/SOLID_\%28object-oriented_design\%29}).
+--------------------------- ADD ------------------------}
 
 \item{lock_objects}{Should the environments of the generated objects be
 locked? If locked, new members can't be added to the objects.}
