@@ -104,7 +104,7 @@
 #' @param inherit A R6ClassGenerator object to inherit from; in other words, a
 #'   superclass. This is captured as an unevaluated expression which is
 #'   evaluated in \code{parent_env} each time an object is instantiated.
-#' --------------------------- ADD ------------------------
+# --------------------------- ADD ------------------------
 #' @param implement A R6ClassGenerator object to inherit from which represents
 #'   an interface class; this is very similar to argument \code{inherit} with
 #'   the subtle difference that such objects merely mimick abstract classes that
@@ -112,7 +112,7 @@
 #'   The main benefit is being able to write code that fits the \emph{SOLID
 #'   principles of object-oriented design}
 #'   (\url{https://en.wikipedia.org/wiki/SOLID_\%28object-oriented_design\%29}).
-#' --------------------------- ADD ------------------------
+# --------------------------- ADD ------------------------
 #' @param portable If \code{TRUE} (the default), this class will work with
 #'   inheritance across different packages. Note that when this is enabled,
 #'   fields and members must be accessed with  \code{self$x} or
