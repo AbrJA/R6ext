@@ -1,12 +1,12 @@
 Package: R6ext
-Title: Extensions to the R6 package
+Title: Extension to the R6 package
 Version: 0.0.0.9000
 Authors@R: 
     person(given = "Abraham",
            family = "Jaimes",
            role = c("aut", "cre"),
            email = "abraham.jaimes.mx@gmail.com")
-Description: 
+Description: Extends the R6 package modifying the `R6Class` function adding the field `implement` to mimick interfaces (or abstract classes).
 License: MIT + file LICENSE
 URL: https://github.com/AbrJA/R6ext/
 BugReports: https://github.com/AbrJA/R6ext/issues
