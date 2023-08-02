@@ -6,5 +6,5 @@ R6ext: Extensions to the R6 package
 ```
 devtools::install_github("AbrJA/R6ext")
 
-library(R6)
+library(R6ext)
 ```
