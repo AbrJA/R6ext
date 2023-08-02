@@ -19,6 +19,7 @@ generator_funs$get_implement <- function() {
 # members; FALSE otherwise.
 generator_funs$has_private <- function() {
   inherit <- get_inherit()
+  implement <- get_implement()
   if (!is.null(private_fields) || !is.null(private_methods))
     TRUE
   # --------------------------- MODIFY ------------------------
