@@ -475,8 +475,9 @@
 # enclosed in the capsule environment
 R6Class <- encapsulate(function(classname = NULL, public = list(),
                                 private = NULL, active = NULL,
+                                inherit = NULL,
                                 # --------------------------- MODIFY ------------------------
-                                inherit = NULL, implement = NULL,
+                                implement = NULL,
                                 # --------------------------- MODIFY ------------------------
                                 lock_objects = TRUE, class = TRUE,
                                 portable = TRUE, lock_class = FALSE,
