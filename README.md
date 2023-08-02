@@ -1,4 +1,4 @@
-R6ext: Extensions to the R6 package
+R6ext: Extension to the R6 package
 ==================================================
 
 ## Installation
